@@ -93,8 +93,28 @@ const ThreadComposer = ({
     let result;
 
     if (type == "library") {
+      const mediaPermission =
+        await ImagePicker.requestMediaLibraryPermissionsAsync(false);
+      console.log("Media permission result:", mediaPermission);
+      if (mediaPermission.status !== "granted") {
+        Alert.alert(
+          "Permission needed",
+          "Photo library access is required to select images"
+        );
+        return;
+      }
       result = await ImagePicker.launchImageLibraryAsync(options);
     } else {
+      const cameraPermission =
+        await ImagePicker.requestCameraPermissionsAsync();
+      console.log("Camera permission result:", cameraPermission);
+      if (cameraPermission.status !== "granted") {
+        Alert.alert(
+          "Permission needed",
+          "Camera access is required to take photos"
+        );
+        return;
+      }
       result = await ImagePicker.launchCameraAsync(options);
     }
 
