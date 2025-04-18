@@ -1,6 +1,6 @@
 import { tokenCache } from "@/utils/cache";
 import { ClerkLoaded, ClerkProvider, useAuth } from "@clerk/clerk-expo";
-import { Slot, useRouter, useSegments } from "expo-router";
+import { Slot, Stack, useRouter, useSegments } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 
 import {
@@ -29,6 +29,11 @@ if (!clerkPublishableKey) {
 LogBox.ignoreLogs(["Clerk: Clerk has been loaded with development keys."]);
 
 SplashScreen.preventAutoHideAsync();
+
+SplashScreen.setOptions({
+  fade: true,
+  duration: 400,
+});
 
 const InitialLayout = () => {
   const [fontsLoaded] = useFonts({
